@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ứng dụng quản lý công việc cá nhân dành cho người mới học HTML, CSS và JavaScript.">
+  <title>My Tasks | Quản lý công việc cá nhân</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">PERSONAL PRODUCTIVITY</p>
+        <h1>Việc hôm nay,<br><span>hoàn thành ngay.</span></h1>
+        <p class="hero-copy">Một nơi đơn giản để ghi lại, sắp xếp và hoàn thành từng mục tiêu nhỏ.</p>
+      </div>
+      <div class="date-card" aria-label="Ngày hiện tại">
+        <span id="weekday">Thứ Hai</span>
+        <strong id="dateNumber">01</strong>
+        <span id="monthYear">Tháng 1, 2026</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="task-panel" aria-labelledby="form-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THÊM MỚI</p>
+            <h2 id="form-title">Bạn cần làm gì?</h2>
+          </div>
+          <p class="keyboard-hint"><kbd>Enter</kbd> để thêm nhanh</p>
+        </div>
+
+        <form id="taskForm" class="task-form">
+          <label class="sr-only" for="taskInput">Tên công việc</label>
+          <input id="taskInput" type="text" maxlength="80" placeholder="Ví dụ: Học JavaScript 30 phút" autocomplete="off" required>
+          <label class="sr-only" for="prioritySelect">Mức độ ưu tiên</label>
+          <select id="prioritySelect">
+            <option value="normal">Bình thường</option>
+            <option value="high">Quan trọng</option>
+          </select>
+          <button class="primary-button" type="submit" aria-label="Thêm công việc">
+            <span aria-hidden="true">＋</span> Thêm việc
+          </button>
+        </form>
+      </section>
+
+      <section class="workspace" aria-labelledby="list-title">
+        <div class="toolbar">
+          <div>
+            <p class="eyebrow">DANH SÁCH</p>
+            <h2 id="list-title">Công việc của tôi</h2>
+          </div>
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <span class="sr-only">Tìm kiếm công việc</span>
+            <input id="searchInput" type="search" placeholder="Tìm công việc...">
+          </label>
+        </div>
+
+        <div class="filter-row" role="group" aria-label="Lọc công việc">
+          <button class="filter-button active" data-filter="all" type="button">Tất cả <span id="allCount">0</span></button>
+          <button class="filter-button" data-filter="active" type="button">Đang làm <span id="activeCount">0</span></button>
+          <button class="filter-button" data-filter="completed" type="button">Hoàn thành <span id="completedCount">0</span></button>
+        </div>
+
+        <ul id="taskList" class="task-list" aria-live="polite"></ul>
+
+        <div id="emptyState" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">✓</div>
+          <h3>Danh sách đang trống</h3>
+          <p>Thêm công việc đầu tiên và bắt đầu một ngày hiệu quả nhé.</p>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Thống kê công việc">
+        <div>
+          <span>Tổng công việc</span>
+          <strong id="totalStat">0</strong>
+        </div>
+        <div>
+          <span>Đã hoàn thành</span>
+          <strong id="doneStat">0</strong>
+        </div>
+        <div class="progress-stat">
+          <span>Tiến độ hôm nay</span>
+          <strong id="progressStat">0%</strong>
+          <div class="progress-track" aria-hidden="true"><div id="progressBar"></div></div>
+        </div>
+        <button id="clearCompleted" class="text-button" type="button">Xóa việc đã xong</button>
+      </section>
+    </main>
+
+    <footer>
+      <p>Made with focus <span aria-hidden="true">✦</span> Dữ liệu được lưu ngay trên trình duyệt của bạn.</p>
+    </footer>
+  </div>
+
+  <template id="taskTemplate">
+    <li class="task-item">
+      <button class="check-button" type="button" aria-label="Đánh dấu hoàn thành"><span>✓</span></button>
+      <div class="task-content">
+        <p class="task-title"></p>
+        <div class="task-meta">
+          <span class="priority-badge"></span>
+          <span class="task-time"></span>
+        </div>
+      </div>
+      <button class="delete-button" type="button" aria-label="Xóa công việc">×</button>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
